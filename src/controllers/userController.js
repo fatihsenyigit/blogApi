@@ -33,6 +33,7 @@ module.exports.user = {
     const data = await User.updateOne(
       { _id: req.params.userId },
       req.body,
+      {runValidators: true}
     );
     res.status(202).send({
       error: false,
