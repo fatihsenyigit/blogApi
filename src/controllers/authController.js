@@ -17,9 +17,24 @@ module.exports.auth = {
                 
                 if(user.password  == passwordCrypto(password)) {
 
-                    res.send({
-                        message: 'login is successfull'
+                    
+                    req.session._id = user._id
+                    req.session.password = user.password
+
+                    // cookie
+
+                    if(req.body?.remindMe == true) {
+                        req.session.remindMe = true
+                        req.sessionOptions.maxAge = 1000 * 10 
+                    }
+                    
+                    res.status(200).send({
+                        error: false,
+                        message: 'login: ok',
+                        user
                     })
+
+                    
 
                 } else {
                     res.errorStatusCode = 401;
@@ -39,6 +54,15 @@ module.exports.auth = {
     },
 
     logout: async (req, res) => {
+
+        // cookie/session delete
+
+        req.session = null
+
+        res.status(200).send({
+            error:false,
+            message:'logout: ok'
+        })
 
     }
 }
