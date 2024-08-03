@@ -43,3 +43,6 @@ app.use("/auth", require("./src/routes/authRouter"));
 app.use(require("./src/middlewares/errorHandler"));
 
 app.listen(PORT, () => console.log("running: http://27.0.0.1:" + PORT));
+
+// sync - once run
+// require('./sync')()
