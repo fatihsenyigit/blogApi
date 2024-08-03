@@ -24,6 +24,9 @@ app.use(
   }),
 );
 
+// middleware to check userId and passoword
+app.use(require('./src/middlewares/userControl'))
+
 app.all("/", (req, res) => {
   res.send({
     session: req.session,
@@ -37,6 +40,6 @@ app.use("/user", require("./src/routes/userRouter"));
 app.use("/auth", require("./src/routes/authRouter"));
 
 //catch error
-app.use(require("./src/errorHandler"));
+app.use(require("./src/middlewares/errorHandler"));
 
 app.listen(PORT, () => console.log("running: http://27.0.0.1:" + PORT));
