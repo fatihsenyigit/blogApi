@@ -26,6 +26,8 @@ app.use(
 
 // middleware to check userId and passoword
 app.use(require('./src/middlewares/userControl'))
+// middleware for queryhandler
+app.use(require('./src/middlewares/queryHandler'))
 
 app.all("/", (req, res) => {
   res.send({
